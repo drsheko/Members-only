@@ -12,9 +12,11 @@
         <input type="text" id="username" name="username" required>
 
         <label for="password">Password:</label>
-        <input type="text" name="password" id="password">
+        <input type="password" name="password" id="password">
 
-
+        <% for(let i=0 ; i <errors.length ; i++){ %>
+            <p><%= errors[i]  %> </p>
+       <% } %> 
         <button>Log in</button>
     </form>
     <a href="/">Back</a>

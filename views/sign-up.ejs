@@ -8,14 +8,27 @@
 </head>
 <body>
     <form action="/sign-up" method="post">
+        <label for="first_name">First name:</label>
+        <input type="text" name="first_name" id="first_name" required>
+
+        <label for="last_name">Last name:</label>
+        <input type="text" name="last_name" id="last_name" required>
+
         <label for="username">User name:</label>
         <input type="text" id="username" name="username" required>
 
         <label for="password">Password:</label>
-        <input type="text" name="password" id="password">
+        <input type="password" name="password" id="password">
 
         <label for="confirmPassword"> Confirm password</label>
-        <input type="text" id="confirmPassword">
+        <input type="password" id="confirmPassword">
+
+        <label for="picture">Upload Profile Picture:</label>
+        <input type="file" name="avatarURL" id="picture">
+        
+        <% for(let i=0 ; i <errors.length ; i++){ %>
+            <p><%= errors[i]  %> </p>
+       <% } %> 
 
         <button>Create account</button>
     </form>

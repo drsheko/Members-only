@@ -1,9 +1,10 @@
 var express = require('express');
 var router  =express.Router();
-
+var flash = require('connect-flash')
 
 router.get('/',(req,res,next)=>{
-    res.render('log-in')
+    var errors = req.flash.error||[]
+    res.render('log-in' , {errors})
 })
 
 
