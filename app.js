@@ -9,10 +9,7 @@ var passport = require('passport')
 var LocalStrategy  =require('passport-local').Strategy;
 var flash = require('connect-flash');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var loginRouter = require('./routes/log-in')
-var signUpRouter = require('./routes/sign-up')
+var Routers = require('./routes/routes');
 
 
 // mongo Database setup
@@ -26,6 +23,44 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// passport setup
+passport.use(
+  new LocalStrategy({passReqToCallback:true},(req,username, password, done) => {
+    User.findOne({ username: username }, (err, user) => {
+      if (err) { 
+        return done(console.log(err));
+      }
+      if (!user) {
+        return done(null, false, req.flash('error',"user is not found :("));
+      }
+     
+      bcrypt.compare(password, user.password,(err, res) => {
+        if(err){return done(console.log(err))}
+        if (!res) {
+            return done(null, false,req.flash('error','Incorrect password...try again'))
+        } 
+        else{
+          return done(null, user);
+        }
+      })
+    });
+  })
+);
+
+
+
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
 
 app.use(flash())
 app.use(session({ secret: 'cats', resave: false, saveUninitialized: true}));
@@ -44,10 +79,7 @@ app.use(function(req, res, next) {
 
 
 // Routers setup
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/log-in',loginRouter);
-app.use('/sign-up' , signUpRouter);
+app.use('/', Routers);
 
 
 // catch 404 and forward to error handler
