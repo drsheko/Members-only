@@ -24,7 +24,7 @@ exports.signup_get = (req,res,next)=>{
 exports.signup_post = [ 
     //upload image...Should be the First Middleware
     upload.single('avatarURL'),
-
+    
     body('first_name').isString().trim().isLength({min:1}).escape().withMessage('Should be at least 1 character'),
     body('last_name').isString().trim().isLength({min:1}).escape().withMessage('Should be at least 1 character'),
     body('username').isString().trim().isLength({min:6}).escape().withMessage('Username should be at least 1 character'),
@@ -45,7 +45,8 @@ exports.signup_post = [
           return res.render("sign-up", { title: "Sign Up Page", errors});
         }
         try{ console.log('sh/01')
-       
+                var uploaded_Url= req.file.filename ;
+               
             bcrypt.hash(req.body.password, 10, ( err, hash ) => {
                 if (err) { console.log(err+'hash ErRor') ;
                 }
@@ -55,7 +56,7 @@ exports.signup_post = [
                        last_name:req.body.last_name,
                        username:req.body.username,
                        password:hash,
-                       avatarURL: req.file.path,
+                       avatarURL: uploaded_Url,
                        member:false,
                        admin:false
                    }).save( err => {
@@ -73,3 +74,5 @@ exports.signup_post = [
         }
              
 ]
+
+

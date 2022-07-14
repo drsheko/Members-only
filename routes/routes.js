@@ -2,18 +2,18 @@ var express = require('express');
 var router = express.Router();
 var homeController = require('../controllers/homeController')
 var userController = require('../controllers/userController')
-var messageController = require('../controllers/messageController')
-
+var messageController = require('../controllers/messageController');
 /* GET home page. */
 router.get('/', homeController.home_get);
 
 // Login Page ...
-router.get('/log-in',homeController.login_get)
-
+router.get('/log-in',homeController.login_get);
+router.post('/log-in',homeController.login_post);
+router.get('/log-out' , homeController.log_out)
 //signup 
-router.get('/sign-up' ,userController.signup_get )
+router.get('/sign-up' ,userController.signup_get );
 
-router.post('/sign-up',userController.signup_post )
+router.post('/sign-up',userController.signup_post );
 
 //users 
 router.get('/', function(req, res, next) {
