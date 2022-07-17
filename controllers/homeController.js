@@ -19,7 +19,7 @@ exports.login_post =
         successRedirect: "/",
           failureRedirect: "/log-in",
           failureFlash:true,
-        })
+        }) 
 
 exports.log_out =  (req, res) => {
     req.logout(function (err) {

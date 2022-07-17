@@ -9,26 +9,36 @@
 <body>
     <form action="/sign-up" method="post" enctype="multipart/form-data">
         <label for="first_name">First name:</label>
-        <input type="text" name="first_name" id="first_name" required>
+        <input type="text" name="first_name" id="first_name" value="<%= typeof form!='undefined'?form.first:''  %> " required>
 
         <label for="last_name">Last name:</label>
-        <input type="text" name="last_name" id="last_name" required>
+        <input type="text" name="last_name" id="last_name"value="<%= typeof form!='undefined'?form.last:''  %> "  required>
 
         <label for="username">User name:</label>
-        <input type="text" id="username" name="username" required>
+        <input type="text" id="username" name="username" value="<%= typeof form!='undefined'?form.username:''  %> " required>
 
         <label for="password">Password:</label>
         <input type="password" name="password" id="password">
 
         <label for="confirmPassword"> Confirm password</label>
-        <input type="password" id="confirmPassword" name="confirmPassword">
+        <input type="password" id="confirmPassword" name="confirmPassword" >
 
         <label for="picture">Upload Profile Picture:</label>
         <input type="file" name="avatarURL" id="picture">
         
-        <% for(let i=0 ; i <errors.length ; i++){ %>
-            <p><%= errors[i]  %> </p>
-       <% } %> 
+        <% if (locals.errors){ %>
+            <ul class='errors'>
+              <% locals.errors.forEach(function(message) {  %>
+                <li><%= message.msg %></li>
+              <% } ); %>
+            </ul>
+            <% } %>
+
+        <% if(typeof usernameError !='undefined'){%>
+            <li>
+                <%= usernameError  %> 
+            </li>
+            <%  } %>    
 
         <button>Create account</button>
     </form>

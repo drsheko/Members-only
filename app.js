@@ -30,7 +30,7 @@ passport.use(
   new LocalStrategy({passReqToCallback:true},(req,username, password, done) => {
     User.findOne({ username: username }, (err, user) => {
       if (err) { 
-        return done(console.log(err));
+        return done(err);
       }
       if (!user) {
         return done(null, false, req.flash('error',"user is not found :("));
@@ -75,6 +75,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // local user setup
 app.use(function(req, res, next) {
   res.locals.currentUser = req.user;
+ 
   next();
 });
 
