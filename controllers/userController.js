@@ -93,8 +93,12 @@ exports.signup_post = [
         }catch(err) {
             return next(err);
           }
-        }
-             
+        }    
 ]
+
+exports.profile_get  = (req,res)=>{
+
+  res.render('profile',{user:req.user})
+}
 
 

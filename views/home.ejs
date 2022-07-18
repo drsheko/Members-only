@@ -14,6 +14,7 @@
         <img src="/images/<%= user.avatarURL  %> " width="100" height="100" alt="see">
        <a href="/message">Create Message</a>
        <a href="/admin">Become admin</a>
+       <a href="/profile/<%= user._id %> ">My Profile</a>
         <a href="/log-out"> Log out</a>
       <% }else{%>
         <div >
@@ -34,6 +35,14 @@
               <p> <%= msg.message  %> </p>
                <h4>Posted by: <span><%= msg.author.username  %> </span></h4>
               <h6><%= msg.timestamp  %> </h6>
+              <% if (user&& (user.admin===true||user.username===msg.author.username) ){%>
+                    <button><a href="/delete/<%= msg._id  %> ">delete</a></button>
+                   
+              <%}  %>
+              
+              <% if (user && user.username ===msg.author.username){%>
+                  <button><a href="">Edit</a></button>
+              <%  } %> 
             </div>
          <% }) %>
        <% } %> 

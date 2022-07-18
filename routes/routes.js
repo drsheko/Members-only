@@ -23,5 +23,8 @@ router.post('/message' , messageController.message_post)
 //Admin 
 router.get('/admin', adminController.admin_get);
 router.post('/admin',adminController.admin_post);
+router.get('/delete/:id',adminController.delete_message);
 
+//profile
+router.get('/profile/:id' , userController.profile_get)
 module.exports = router;
