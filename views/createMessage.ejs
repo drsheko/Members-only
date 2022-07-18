@@ -9,11 +9,17 @@
 <body>
     <form action="/message" method="Post">
         <label for="title"> Title: </label>
-        <input type="text" name="title" id="title" required>
+        <input type="text" name="title" id="title" value="<%= typeof messageData !='undefined'?messageData.title:''  %> " required>
 
         <label for="message">Message:</label>
-        <input type="text" name="message" id="message" required>
+        <input type="text" name="message" id="message" value="<%= typeof messageData!='undefined'?messageData.message:'' %> " required>
         <button>Post</button>
     </form>
+    <% if (typeof errors != 'undefined'){ %>
+       <% errors.forEach(message=>{ %>
+            <p> <%= message.msg  %> </p>
+            
+      <%  })%>
+  <%  } %> 
 </body>
 </html>

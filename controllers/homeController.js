@@ -1,12 +1,15 @@
-const User = require('../models/user');
+
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const {body , validationResult} = require('express-validator');
 const passport = require('passport');
+const Message= require('../models/messageModel')
+const User = require('../models/user');
 
-exports.home_get = (req,res)=>{
- 
-    res.render('home', { title: 'Home' , user:req.user })
+exports.home_get = async(req,res)=>{
+  var messages = await Message.find().sort([['timestamp','descending']]).populate('author')
+  console.log(messages)
+    res.render('home', { title: 'Home' , user:req.user , messages })
 }
 
 exports.login_get = (req,res,next)=>{
