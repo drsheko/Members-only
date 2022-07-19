@@ -1,7 +1,10 @@
+var moment = require('moment'); // require
+ 
 const { body ,validationResult} = require("express-validator")
 const { locals } = require("../app")
 const Message = require('../models/messageModel')
 const { findById } = require("../models/user")
+
 exports.message_create_get = (req,res)=>{
     res.render('createMessage' ,{title:'create message'})
 }
@@ -32,6 +35,8 @@ exports.message_create_post = [
 
             }).save((err)=>{
                 if (err){ next(err)}
+                
+                
                 res.redirect('/')
             }
             )

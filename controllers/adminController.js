@@ -39,6 +39,7 @@ exports.delete_message = async(req,res,next)=>{
         if(err){
             next(err);
         }
+        req.flash('success' ,'Message has been deleted')
         res.redirect('/')
     })
 }

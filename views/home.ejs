@@ -42,7 +42,8 @@
               <h2> <%= msg.title  %>  </h2>
               <p> <%= msg.message  %> </p>
                <h4>Posted by: <span><%= msg.author.username  %> </span></h4>
-              <h6><%= msg.timestamp  %> </h6>
+              <% var tm = moment(msg.timestamp) %> 
+              <p><%= moment(tm).fromNow()  %> </p>
               <% if (user&& (user.admin===true||user.username===msg.author.username) ){%>
                     <button><a href="/delete/<%= msg._id  %> ">delete</a></button>
                    

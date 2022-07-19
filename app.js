@@ -1,4 +1,6 @@
 require('dotenv').config()
+var moment = require('moment'); 
+moment().format(); 
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -76,7 +78,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // local user setup
 app.use(function(req, res, next) {
   res.locals.currentUser = req.user;
- 
+ // moment to ejs view
+ res.locals.moment = moment
   next();
 });
 
