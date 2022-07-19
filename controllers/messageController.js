@@ -1,11 +1,12 @@
 const { body ,validationResult} = require("express-validator")
 const { locals } = require("../app")
 const Message = require('../models/messageModel')
-exports.message_get = (req,res)=>{
+const { findById } = require("../models/user")
+exports.message_create_get = (req,res)=>{
     res.render('createMessage' ,{title:'create message'})
 }
 
-exports.message_post = [
+exports.message_create_post = [
     body('title').trim().isLength({min:3 ,max:50}).escape().withMessage('Title must be minumum 3 ,maximum 50 charcters'),
     body('message').trim().isLength({min:3 ,max:200}).escape().withMessage('Title must be minumum 3 ,maximum 200 charcters'),
 
@@ -42,3 +43,25 @@ exports.message_post = [
 
 ]
 
+exports.message_edit_get = async(req,res)=>{
+    var id = req.params.id;
+    var messageToEdit = await Message.findById(id);
+    console.log( "working...." + messageToEdit )
+    res.render('editMessage' , {message:messageToEdit})
+}
+
+exports.message_edit_post = async(req,res,next)=>{
+    var id = req.params.id;
+     Message.findByIdAndUpdate(id,{
+        $set:{
+            title:req.body.title,
+            message:req.body.message
+        }
+    },(err=>{
+        if(err){
+            return next(err)
+        }
+        req.flash('success' , 'Message has edited');
+        res.redirect('/')
+    }));
+}

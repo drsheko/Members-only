@@ -8,7 +8,7 @@ const User = require('../models/user');
 
 exports.home_get = async(req,res)=>{
   var messages = await Message.find().sort([['timestamp','descending']]).populate('author')
-  console.log(messages)
+  
     res.render('home', { title: 'Home' , user:req.user , messages })
 }
 

@@ -41,7 +41,7 @@
               <%}  %>
               
               <% if (user && user.username ===msg.author.username){%>
-                  <button><a href="">Edit</a></button>
+                  <button><a href="/editMessage/<%= msg._id  %> ">Edit</a></button>
               <%  } %> 
             </div>
          <% }) %>
