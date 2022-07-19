@@ -7,6 +7,17 @@
     <title>Document</title>
 </head>
 <body>
+    <% if (typeof success!='undefined'&& success.length>0){%>
+        <% success.forEach(ele => {%>
+          <h3><%= ele  %> </h3>
+       <% }) %> 
+     <% } %> 
+
+     <% if (typeof error!='undefined'&& error.length>0){%>
+        <% error.forEach(err => {%>
+          <h3><%= err  %> </h3>
+        <% }) %> 
+     <% } %>
     <form action="/log-in" method="post">
         <label for="username">User name:</label>
         <input type="text" id="username" name="username" required>
@@ -14,9 +25,7 @@
         <label for="password">Password:</label>
         <input type="password" name="password" id="password">
 
-        <% for(let i=0 ; i <errors.length ; i++){ %>
-            <p><%= errors[i]  %> </p>
-       <% } %> 
+        
         <button>Log in</button>
     </form>
     <a href="/">Back</a>

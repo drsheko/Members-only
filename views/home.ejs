@@ -6,6 +6,14 @@
   </head>
   <body>
     <nav>
+
+        <% if (typeof success!='undefined'&& success.length>0){%>
+           <% success.forEach(ele => {%>
+               <h3><%= ele  %> </h3>
+           <% }) %> 
+        <% } %> 
+
+
       <h1 class="title"> Members Only</h1>
       
       <% if (user){%>

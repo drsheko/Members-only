@@ -85,7 +85,7 @@ exports.signup_post = [
                         
                            next(err)
                        }
-                       
+                       req.flash('success' , ' Account has created successfully')
                        res.redirect('/log-in')
                    })
                 }
