@@ -75,6 +75,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Bootstrap setup
+app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
+
 // local user setup
 app.use(function(req, res, next) {
   res.locals.currentUser = req.user;
