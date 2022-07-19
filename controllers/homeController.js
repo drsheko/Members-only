@@ -8,13 +8,14 @@ const User = require('../models/user');
 
 exports.home_get = async(req,res)=>{
   var messages = await Message.find().sort([['timestamp','descending']]).populate('author')
-  
-    res.render('home', { title: 'Home' , user:req.user , messages })
+  var success = req.flash().success
+    res.render('home', { title: 'Home' , user:req.user , messages  ,success})
 }
 
 exports.login_get = (req,res,next)=>{
-    var errors = req.flash.error||[]
-    res.render('log-in' , {errors , title:"Log in Page"})
+    var error = req.flash('error')
+    var success = req.flash().success
+    res.render('log-in' , {success, error,title:"Log in Page"})
 }
 
 exports.login_post = 
