@@ -6,6 +6,7 @@ html{
 }
 body {
   padding: 0;
+  background-color: rgba(134, 134, 134, 0.322);
 }
 
 nav{
@@ -57,9 +58,17 @@ nav{
 }
 .content{
   padding:20px;
+  width: 60%;
+  margin:5px auto;
+  
 }
 .card{
+  border-radius:1rem;
   margin: 12px;
+  box-shadow: 0 0 10px;
+}
+.card :hover{
+   
 }
 .card-header{
   color:rgba(0, 0, 0, 0.63);
