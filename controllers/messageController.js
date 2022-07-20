@@ -51,7 +51,6 @@ exports.message_create_post = [
 exports.message_edit_get = async(req,res)=>{
     var id = req.params.id;
     var messageToEdit = await Message.findById(id);
-    console.log( "working...." + messageToEdit )
     res.render('editMessage' , {title:'Edit Message',message:messageToEdit , user:req.user})
 }
 

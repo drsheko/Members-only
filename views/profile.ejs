@@ -4,8 +4,19 @@
     <h1>My Profile</h1>
     <h2><%= user.username  %> </h2>
     <a href="/">Go Back</a>
+    <a href="/add-photo"> Add Photo</a>
 
 
+    <div>
+        <% if (typeof success!='undefined'&& success.length>0){%>
+            <% success.forEach(ele => {%>
+             <div class="alert alert-success" role="alert">
+               <h3><%= ele  %> </h3> 
+             </div>
+                
+            <% }) %> 
+         <% } %> 
+    </div>
     <section class="content">
         <% if (messages.length>0){ %>
            <% messages.forEach(msg=>{ %>

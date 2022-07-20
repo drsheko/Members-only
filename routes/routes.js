@@ -30,4 +30,6 @@ router.get('/delete/:id',adminController.delete_message);
 
 //profile
 router.get('/profile/:id' , userController.profile_get)
+router.get('/add-photo' ,userController.add_photo_get)
+router.post('/add-photo' , userController.add_photo_post)
 module.exports = router;

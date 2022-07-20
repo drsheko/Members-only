@@ -103,8 +103,28 @@ exports.profile_get  = async(req,res,next)=>{
   var messages = await Message.find().sort([['timestamp','descending']])
   .populate('author')
   
-  
-  res.render('profile',{title:'My Profile',user ,messages })
+  var success = req.flash().success
+  res.render('profile',{title:'My Profile',user ,messages ,success })
 }
 
+exports.add_photo_get = (req,res)=>{
+  res.render('add-photo' ,{title:'Add Photo' ,user:req.user})
+}
+exports.add_photo_post = [
+  upload.single('add-photo'),
+  async(req,res)=>{
+    var id = req.user._id;
+    uploaded_Url = req.file.filename;
+    var profile =  User.findByIdAndUpdate(id,{
+      $set:{
+        avatarURL:uploaded_Url
+      }
+    },(err=>{
+      if(err){return next(err)}
+      req.flash('success','Profile Picture updated');
+      res.redirect(`/profile/${id}`)
+    })
+    )
+}
+]
 
