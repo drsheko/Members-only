@@ -98,7 +98,7 @@ exports.signup_post = [
 
 exports.profile_get  = (req,res)=>{
 
-  res.render('profile',{user:req.user})
+  res.render('profile',{title:'My Profile',user:req.user})
 }
 
 

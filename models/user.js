@@ -7,7 +7,7 @@ var userSchema = new Schema({
     username:{type:String , minLength:1 , required:true},
     password:{type:String , minLength:6  , required:true},
     confirmPassword:{type:String , minLength:6 , maxLength:15 },
-    avatarURL : { type: String , default:'/images/unkownUserDefault.webp'},
+    avatarURL : { type: String , default:'unkownUserDefault.webp'},
     member : {type:Boolean , default: false},
     admin : { type:Boolean , default:false },
 })

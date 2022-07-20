@@ -1,14 +1,19 @@
 <%- include('./partials/header.ejs')  %> 
+<%- include('./partials/nav.ejs')  %>
 <body>
-    <% if (typeof success!='undefined'&& success.length>0){%>
+     <% if (typeof success!='undefined'&& success.length>0){%>
         <% success.forEach(ele => {%>
-          <h3><%= ele  %> </h3>
-       <% }) %> 
+            <div class="alert alert-success" role="alert" >
+                <h3><%= ele  %> </h3>
+            </div>
+        <% }) %> 
      <% } %> 
 
      <% if (typeof error!='undefined'&& error.length>0){%>
         <% error.forEach(err => {%>
-          <h3><%= err  %> </h3>
+            <div class="alert alert-danger" role="alert" >
+                <h3><%= err  %> </h3>  
+            </div>
         <% }) %> 
      <% } %>
     <form action="/log-in" method="post">

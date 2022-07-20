@@ -1,4 +1,5 @@
 <%- include('./partials/header.ejs')  %> 
+<%- include('./partials/nav.ejs')  %> 
 <body>
     <form action="/sign-up" method="post" enctype="multipart/form-data">
         <label for="first_name">First name:</label>
@@ -20,18 +21,20 @@
         <input type="file" name="avatarURL" id="picture">
         
         <% if (locals.errors){ %>
-            <ul class='errors'>
               <% locals.errors.forEach(function(message) {  %>
-                <li><%= message.msg %></li>
+                <div class="alert alert-danger" role="alert">
+                    <li><%= message.msg %></li>
+                </div> 
               <% } ); %>
-            </ul>
-            <% } %>
+        <% } %>
 
         <% if(typeof usernameError !='undefined'){%>
-            <li>
-                <%= usernameError  %> 
-            </li>
-            <%  } %>    
+            <div class="alert alert-danger" role="alert">
+                <li>
+                    <%= usernameError  %> 
+                </li>
+            </div>
+        <%  } %>    
 
         <button>Create account</button>
     </form>

@@ -1,4 +1,5 @@
 <%- include('./partials/header.ejs')  %> 
+<%- include('./partials/nav.ejs')  %> 
 <body>
     <form action="/message" method="Post">
         <label for="title"> Title: </label>
@@ -9,10 +10,11 @@
         <button>Post</button>
     </form>
     <% if (typeof errors != 'undefined'){ %>
-       <% errors.forEach(message=>{ %>
-            <p> <%= message.msg  %> </p>
-            
-      <%  })%>
-  <%  } %> 
+        <% errors.forEach(message=>{ %>
+            <div class="alert alert-danger" role="alert">
+                <p> <%= message.msg  %> </p>
+            </div>
+        <% })%>
+     <%  } %> 
 </body>
 </html>

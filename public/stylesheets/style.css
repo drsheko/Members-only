@@ -1,8 +1,87 @@
+html{
+  scroll-behavior: smooth;
+  margin: 0;
+  padding:0;
+ 
+}
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0;
 }
 
-a {
-  color: #00B7FF;
+nav{
+  padding: 24px;
+}
+.navbar-brand{
+  text-decoration: none;
+  font-size:33px  ;
+  font-weight: 900;
+  color:azure;
+}
+
+.bi-house-fill{
+  font-size: 36px;
+  position:absolute;
+  top: 5px;
+}
+
+#navbarNavDropdown{
+  display: flex;
+  justify-content: flex-end;
+  
+}
+.navbar-nav{
+  display: flex;
+  flex-direction: row;
+  gap:10px;
+}
+.user-name{
+  color:white;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+
+.bi-plus-square-fill{
+  font-size: 36px;
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.content{
+  padding:20px;
+}
+.card{
+  margin: 12px;
+}
+.card-header{
+  color:rgba(0, 0, 0, 0.63);
+  font-size: 22px;
+  font-weight: 600;
+}
+.card-body{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.card-body >div{
+  align-self: flex-end;
+}
+.card-footer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+  .card-body >div> a {
+    align-self: flex-end;
+  color:rgba(0, 0, 0, 0.349);
+  font-size: 20px;
+}
+.card-body >div :hover{
+  color:black;
 }

@@ -1,55 +1,100 @@
 <%- include('./partials/header.ejs')  %> 
   <body>
-    <nav>
-
-        <% if (typeof success!='undefined'&& success.length>0){%>
-           <% success.forEach(ele => {%>
-               <h3><%= ele  %> </h3>
-           <% }) %> 
-        <% } %> 
-
-
-      <h1 class="title"> Members Only</h1>
-      
-      <% if (user){%>
-        <h1> Hi <%= user.first_name  %> !!</h1>
-   
-        <img src="/images/<%= user.avatarURL  %> " width="100" height="100" alt="see">
-       <a href="/message">Create Message</a>
-       <a href="/admin">Become admin</a>
-       <a href="/profile/<%= user._id %> ">My Profile</a>
-        <a href="/log-out"> Log out</a>
-      <% }else{%>
-        <div >
-          <a href="/log-in">Log in</a>
-          <a href="/sign-up">Sign up</a>
-        </div>
-     <% } %> 
-
-      
     
+    <nav class="navbar navbar-expand-lg sticky-top bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand d-none d-sm-block " href="/">Members Only</a>
+         <a href="/" class="d-block d-sm-none"> <i class="bi bi-house-fill"></i></a>
+       
+          <ul class="navbar-nav">
+            
+                            <% if (user){%>
+                      
+                     
+                      <li class="nav-item">
+                        <a href="/message"><i class="bi bi-plus-square-fill "></i></a>
+                      </li>
+                      <li class="nav-item">
+                        <img src="/images/<%= user.avatarURL  %> " class="avatar" alt="Profile-avatar">
+                      </li>
+                      
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle  btn btn-outline-primary user-name" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          <%= user.first_name  %>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                          <li><a class="dropdown-item" href="/admin">Become admin</a></li>
+                          <li><a class="dropdown-item" href="/profile/<%= user._id %> ">My Profile</a></li>
+                          <li><a class="dropdown-item" href="/log-out"> Log out</a></li>
+                        </ul>
+                      </li>
+                    
+                    <% }else{%>
+                      <div >
+                        <a href="/log-in" class="btn btn-success">Log in</a>
+                        <a href="/sign-up" class="btn btn-success">Sign up</a>
+                      </div>
+                  <% } %> 
+            
+            
+          </ul>
+        
+      </div>
     </nav>
 
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+    <% if (typeof success!='undefined'&& success.length>0){%>
+      <% success.forEach(ele => {%>
+       <div class="alert alert-success" role="alert">
+         <h3><%= ele  %> </h3> 
+       </div>
+          
+      <% }) %> 
+   <% } %> 
+    
     <section class="content">
-        <% if (messages.length>0){ %>
+      <% if (messages.length>0){ %>
          <% messages.forEach(msg=>{ %>
-            <div>
-              <h2> <%= msg.title  %>  </h2>
-              <p> <%= msg.message  %> </p>
-               <h4>Posted by: <span><%= msg.author.username  %> </span></h4>
-              <% var tm = moment(msg.timestamp) %> 
-              <p><%= moment(tm).fromNow()  %> </p>
-              <% if (user&& (user.admin===true||user.username===msg.author.username) ){%>
-                    <button><a href="/delete/<%= msg._id  %> ">delete</a></button>
-                   
-              <%}  %>
+            <div class="card text-center" >
+              <div class="card-header">
+                <h3> <%= msg.title  %>  </h3>
+              </div>
+              <div class="card-body">
+                <h4 class="card-text"> <%= msg.message  %> </h4>
+                <div>
+                <% if (user&& (user.admin===true||user.username===msg.author.username) ){%>
+                  <a href="/delete/<%= msg._id  %> "class="bi bi-trash" ></a>
+                <%}  %>
+            
+                <% if (user && user.username ===msg.author.username){%>
+                  <a href="/editMessage/<%= msg._id  %> "class="bi bi-pencil-fill" ></a>
+                <%  } %> 
+                </div>
+              </div>
               
-              <% if (user && user.username ===msg.author.username){%>
-                  <button><a href="/editMessage/<%= msg._id  %> ">Edit</a></button>
-              <%  } %> 
+              <div class="card-footer text-muted">
+                <p>Posted by <span><%= msg.author.username  %> </span></p>
+                <% var tm = moment(msg.timestamp) %> 
+                <p><%= moment(tm).fromNow()  %> </p>
+              </div>
+        
             </div>
          <% }) %>
-       <% } %> 
+      <% } %> 
     </section>
+   
   </body>
 </html>
