@@ -4,5 +4,39 @@
     <h1>My Profile</h1>
     <h2><%= user.username  %> </h2>
     <a href="/">Go Back</a>
+
+
+    <section class="content">
+        <% if (messages.length>0){ %>
+           <% messages.forEach(msg=>{ %>
+            <% if (msg.author.username === user.username ) {%> 
+              <div class="card text-center" >
+                <div class="card-header">
+                  <h3> <%= msg.title  %>  </h3>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-text"> <%= msg.message  %> </h4>
+                  <div>
+                  
+                    <a href="/delete/<%= msg._id  %> "class="bi bi-trash" ></a>
+                  
+              
+                  
+                    <a href="/editMessage/<%= msg._id  %> "class="bi bi-pencil-fill" ></a>
+                  
+                  </div>
+                </div>
+                
+                <div class="card-footer text-muted">
+                  <p>Posted by <span>me </span></p>
+                  <% var tm = moment(msg.timestamp) %> 
+                  <p><%= moment(tm).fromNow()  %> </p>
+                </div>
+          
+              </div>
+              <% } %> 
+           <% }) %>
+        <% } %> 
+      </section>
 </body>
 </html>

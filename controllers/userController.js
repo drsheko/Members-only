@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Message =require('../models/messageModel');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const {body , validationResult} = require('express-validator');
@@ -96,9 +97,14 @@ exports.signup_post = [
         }    
 ]
 
-exports.profile_get  = (req,res)=>{
-
-  res.render('profile',{title:'My Profile',user:req.user})
+exports.profile_get  = async(req,res,next)=>{
+  
+  var user= req.user
+  var messages = await Message.find().sort([['timestamp','descending']])
+  .populate('author')
+  
+  
+  res.render('profile',{title:'My Profile',user ,messages })
 }
 
 
