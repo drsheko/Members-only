@@ -2,22 +2,32 @@
 <%- include('./partials/nav.ejs')  %> 
 
 <body>
-    <h1> Became an admin</h1>
-    <form action="/admin" method="post">
-        <label for="adminPassword"> Enter Admin Password:</label>
-        <input type="password" name="adminPassword" required>
-        <button><a href="/"> Go back</a></button>
-       <button type="submit">Submit</button>
-    </form>
-    <% if (locals.errors){ %>
-        <ul class='errors'>
-          <% locals.errors.forEach(function(message) {  %>
-            <div class="alert alert-danger" role="alert" >
-              <li><%= message.msg %></li>
-            </div>
+    <div class="admin-nav bg-secondary " >
+      <h3 class="text-center"> Became an admin</h3>
+    </div>
+   
+    <form action="/admin" method="post" class="admin-form">
+        <div>
+          <% if (locals.errors){ %>
+              <% locals.errors.forEach(function(message) {  %>
+                <div class="alert alert-danger" role="alert" >
+                  <li><%= message.msg %></li>
+                </div>
+                
+              <% } ); %>
             
-          <% } ); %>
-        </ul>
-        <% } %>
+            <% } %>
+        </div>
+        <div class="form-group">
+          <label for="adminPassword"> Enter Admin Password:</label>
+          <input type="password" class="form-control" name="adminPassword" required>
+        </div>
+        <div class="btn-container">
+          <a href="/" class="btn btn-primary"> Cancel</a>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        
+    </form>
+    
 </body>
 </html>

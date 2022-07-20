@@ -51,7 +51,10 @@ nav{
   height: 50px;
   border-radius: 50%;
 }
-
+.errors-container{
+  margin:10px;
+  font-size: 26px;
+}
 .content{
   padding:20px;
 }
@@ -85,3 +88,65 @@ nav{
 .card-body >div :hover{
   color:black;
 }
+
+.login-form{
+  border:1px gray solid;
+  border-radius: 5px;
+  padding:25px;
+  margin: 40px auto;
+  width: 60%;
+  height: 30%;
+}
+.login-form>div{
+  margin:10px;
+}
+
+.login-btn{
+ align-self: center;
+}
+.signup-form{
+  border:1px gray solid;
+  border-radius: 5px;
+  padding:25px;
+  margin: 40px auto 0;
+  width: 60%;
+  min-height: 60%;
+  
+}
+
+.signup-form>.btn-container ,
+.createmessage-form>.btn-container,
+.editmessage-form>.btn-container{
+  text-align: center;
+}
+.signup-form>.btn-container>button,
+.createmessage-form>.btn-container>button,
+.editmessage-form>.btn-container>button{
+  font-weight: 600;
+}
+
+.createmessage-form,
+.editmessage-form,
+.admin-form{
+  border:1px gray solid;
+  border-radius: 5px;
+  padding:25px;
+  margin: 40px auto 0;
+  width: 60%;
+  
+}
+.createmessage-form>div,
+.editmessage-form>div,
+.admin-form>div{
+  margin:10px;
+}
+
+.admin-nav{
+  padding: 5px;
+  color:rgba(150, 191, 228, 0.479);
+  font-weight: 500;
+}
+.admin-nav>h3{
+  text-shadow: 1px 1px white;
+}
+

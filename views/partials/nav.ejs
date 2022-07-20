@@ -28,10 +28,10 @@
                   
                   <% }else{%>
                     <div >
-                        <% if(title !== 'Log in Page'){%>
+                        <% if(typeof title!= 'undefined' &&     title !== 'Log in Page'){%>
                             <a href="/log-in" class="btn btn-success">Log in</a>
                        <% } %> 
-                       <% if(title !== 'Sign-up Page'){%>
+                       <% if(typeof title!= 'undefined' && title !== 'Sign-up Page'){%>
                              <a href="/sign-up" class="btn btn-success">Sign up</a>
                         <% } %>
                     </div>
