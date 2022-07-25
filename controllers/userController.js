@@ -27,11 +27,11 @@ exports.signup_post = [
     upload.single('avatarURL'),
     
     
-    body('first_name').isString().trim().isLength({min:1}).escape().withMessage('Should be at least 1 character'),
-    body('last_name').isString().trim().isLength({min:1}).escape().withMessage('Should be at least 1 character'),
+    body('first_name').isString().trim().isLength({min:1}).escape().withMessage('First name should be at least 1 character'),
+    body('last_name').isString().trim().isLength({min:1}).escape().withMessage('Last name should be at least 1 character'),
     body('username').isString().trim().isLength({min:6}).escape().withMessage('Username should be at least 6 character'),
     body('password').trim().isLength({min:6}).escape().withMessage('Password should be at least 6 character'),
-    body('confirmPassword').trim().isLength({min:6}).escape().withMessage('Password should be at least 6 character')
+    body('confirmPassword').trim().isLength({min:6}).escape().withMessage('Password confirmation should match your password ')
     .custom(async(value, { req }) => {
         if (value !== req.body.password) {
             

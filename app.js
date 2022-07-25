@@ -17,7 +17,7 @@ var Routers = require('./routes/routes');
 
 
 // mongo Database setup
-const mongodb  = "mongodb+srv://shady:shady1@users.y1khye5.mongodb.net/?retryWrites=true&w=majority";
+const mongodb  = "mongodb+srv://shady:"+process.env.MONGO_PASSCODE+"@users.y1khye5.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(mongodb,{ useUnifiedTopology: true, useNewUrlParser: true })
 const db = mongoose.connection;
 db.on("error", console.error.bind(console,'Mongo Connection Error'))
@@ -36,13 +36,13 @@ passport.use(
         return done(err);
       }
       if (!user) {
-        return done(null, false, req.flash('error',"user is not found :("));
+        return done(null, false, req.flash('error',"user is not found "));
       }
      
       bcrypt.compare(password, user.password,(err, res) => {
         if(err){return done(console.log(err))}
         if (!res) {
-            return done(null, false,req.flash('error','Incorrect password...try again'))
+            return done(null, false,req.flash('error','Incorrect password'))
         } 
         else{
           return done(null, user);

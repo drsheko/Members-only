@@ -2,6 +2,8 @@ const { body, validationResult } = require("express-validator")
 const { locals } = require("../app")
 const user = require("../models/user")
 const Message = require('../models/messageModel')
+
+
 exports.admin_get = (req,res)=>{
     res.render('admin' ,{title:'Become Admin',user:req.user})
 }
