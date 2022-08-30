@@ -1,5 +1,4 @@
 const { body, validationResult } = require("express-validator")
-const { locals } = require("../app")
 const user = require("../models/user")
 const Message = require('../models/messageModel')
 

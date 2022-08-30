@@ -16,9 +16,7 @@ const storage = multer.diskStorage({
   })
   const upload = multer({storage:storage});
 
-
 exports.signup_get = (req,res,next)=>{
-    //var errors = req.flash.error||[]
     res.render('sign-up' ,{ title:'Sign-up Page'})
 }
 
@@ -26,15 +24,13 @@ exports.signup_post = [
     //upload image...Should be the First Middleware
     upload.single('avatarURL'),
     
-    
     body('first_name').isString().trim().isLength({min:1}).escape().withMessage('First name should be at least 1 character'),
     body('last_name').isString().trim().isLength({min:1}).escape().withMessage('Last name should be at least 1 character'),
     body('username').isString().trim().isLength({min:6}).escape().withMessage('Username should be at least 6 character'),
     body('password').trim().isLength({min:6}).escape().withMessage('Password should be at least 6 character'),
     body('confirmPassword').trim().isLength({min:6}).escape().withMessage('Password confirmation should match your password ')
     .custom(async(value, { req }) => {
-        if (value !== req.body.password) {
-            
+        if (value !== req.body.password) {  
            throw new Error('Password confirmation does not match password');
         }
         return true;
@@ -49,12 +45,9 @@ exports.signup_post = [
             confirmPassword:req.body.confirmPassword
         }
         const isUsernameToken = await User.findOne({username:req.body.username})
-        if(isUsernameToken != null){
-            
+        if(isUsernameToken != null){  
               return res.render("sign-up", { title: "Sign Up Page", usernameError:'Username is aleardy token !!' , form})
         }     
-
-
         const errors = validationResult(req);
         if (!errors.isEmpty()) { 
             req.flash('error',`${errors}`)
@@ -62,10 +55,7 @@ exports.signup_post = [
           return  res.render("sign-up", { title: "Sign Up Page", errors:errors.errors , form});
         }
         try{ 
-                var uploaded_Url 
-                
-                 
-               
+                var uploaded_Url; 
             bcrypt.hash(req.body.password, 10, ( err, hash ) => {
                 if (err) { console.log(err) ;
                 }
@@ -83,7 +73,6 @@ exports.signup_post = [
                        admin:false
                    }).save( err => {
                        if (err) { 
-                        
                            next(err)
                        }
                        req.flash('success' , ' Account has created successfully')
@@ -98,7 +87,6 @@ exports.signup_post = [
 ]
 
 exports.profile_get  = async(req,res,next)=>{
-  
   var user= req.user
   var messages = await Message.find().sort([['timestamp','descending']])
   .populate('author')

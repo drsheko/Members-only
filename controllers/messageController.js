@@ -1,7 +1,7 @@
 var moment = require('moment'); // require
  
-const { body ,validationResult} = require("express-validator")
-const { locals } = require("../app")
+const { body ,validationResult} = require("express-validator");
+
 const Message = require('../models/messageModel')
 const { findById } = require("../models/user")
 
@@ -14,8 +14,6 @@ exports.message_create_post = [
     body('message').trim().isLength({min:3 ,max:200}).escape().withMessage('Title must be minumum 3 ,maximum 200 charcters'),
 
     async(req,res,next)=>{
-        //console.log(res.locals)
-        console.log(res.locals.currentUser)
         const errors = validationResult(req);
         var messageData = {
             title:req.body.title,
